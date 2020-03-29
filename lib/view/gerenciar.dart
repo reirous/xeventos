@@ -1,9 +1,8 @@
-import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:xeventos/model/acompanhante.dart';
 import 'package:xeventos/model/funcionario.dart';
+import 'package:xeventos/view/lista.dart';
 
 class Gerenciar extends StatefulWidget{
 
@@ -21,6 +20,8 @@ class _GerenciarPageState extends State<Gerenciar>{
     final funcionarioControler = TextEditingController();
     Acompanhante acompanhante = new Acompanhante();
     List _funcionarioList = [];
+    List<List<String>> dataToPdf = new List<List<String>>();
+    int totalAcomp = 0;
 
     Future selectData() async{
         QuerySnapshot queryFunc = await Firestore.instance.collection('Participante').getDocuments();
@@ -260,15 +261,18 @@ class _GerenciarPageState extends State<Gerenciar>{
     
     @override
     Widget build(BuildContext context){
-      //selectData();
       return Scaffold(
         appBar: AppBar(
           title: Text('Lista de Presentes'),
-          actions: <Widget>[            
+          actions: <Widget>[ 
             IconButton(
-                      icon: Icon(Icons.arrow_back),
-                      onPressed:(){ Navigator.pushReplacementNamed(context, '/');},
-                    )
+              icon: Icon(Icons.print),
+              onPressed: () =>dataToList(context),
+            ),           
+            IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed:(){ Navigator.pushReplacementNamed(context, '/');},
+            )
           ],
         ),
         body: Column(
@@ -346,13 +350,9 @@ class _GerenciarPageState extends State<Gerenciar>{
                                 child: Row(
                                   children: <Widget>[
                                     Expanded(
-                                      child: Text('Nome acompanhante: ' + _funcionarioList[indexPai].acompanhante[index].nome,
-                                                  style: TextStyle(fontSize: 16.0)),
-                                    ),            
-                                    Expanded(
-                                      child: Text('Parentesco:' + _funcionarioList[indexPai].acompanhante[index].parentesco,
-                                                  style: TextStyle(fontSize: 16.0)),
-                                    ),
+                                      child: Text('Acompanhante: ' + _funcionarioList[indexPai].acompanhante[index].nome + 
+                                      ', ' + _funcionarioList[indexPai].acompanhante[index].parentesco, style: TextStyle(fontSize: 16.0)),
+                                    ),  
                                     RaisedButton(
                                       child: Text('Editar'),
                                       onPressed: (){
@@ -382,5 +382,25 @@ class _GerenciarPageState extends State<Gerenciar>{
     );
   }
 
+  void dataToList(BuildContext context){
+    for(int i = 0; i < _funcionarioList.length; i++){
+      List<String> auxiliar = new List<String>();
+      String acompanhanteAux = "";
+      auxiliar.add(_funcionarioList[i].nome);
+      for(int j = 0; j < _funcionarioList[i].acompanhante.length; j++){
+        acompanhanteAux += "\n - " + _funcionarioList[i].acompanhante[j].nome + ", " + 
+        _funcionarioList[i].acompanhante[j].parentesco + ";";
+        totalAcomp++;
+      }
+      auxiliar.add(acompanhanteAux);
+      dataToPdf.add(auxiliar);
+    }
+    Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Lista(lista: dataToPdf, totalFunc: dataToPdf.length, totalAcomp: totalAcomp)
+        )
+      );
+  }
 }
 

@@ -67,13 +67,13 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new RaisedButton(
+              onPressed: () {Navigator.pushReplacementNamed(context, '/eventos');},
+              child: Text('Participar'),
+            ),
+            new RaisedButton(
               onPressed: () {Navigator.pushReplacementNamed(context, '/gerenciar');},
               child: Text('Gerenciar'),
             ),
-            new RaisedButton(
-              onPressed: () {Navigator.pushReplacementNamed(context, '/eventos');},
-              child: Text('Eventos'),
-            )
           ],
         ),
       ),

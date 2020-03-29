@@ -8,7 +8,6 @@ class Funcionario {
   String nome;
   List<Acompanhante> acompanhante;
   DocumentReference reference;
-  
 
   Funcionario({
     this.nome,

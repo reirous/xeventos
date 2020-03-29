@@ -20,6 +20,10 @@ dependencies:
   flutter:
     sdk: flutter
   cloud_firestore: ^0.13.4+2
+  pdf: ^1.6.0
+  flutter_full_pdf_viewer: ^1.0.6
+  path_provider: ^1.6.5
+  printing: ^3.2.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -35,7 +39,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

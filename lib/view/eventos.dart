@@ -24,8 +24,6 @@ class _EventosPageState extends State<Eventos>{
           Funcionario newFuncionario = Funcionario();
           newFuncionario.nome = funcionarioControler.text;
           newFuncionario.acompanhante = new List<Acompanhante>();
-          //DocumentReference doc = Firestore.instance.collection('Participante').add({'nome':newFuncionario.nome});
-          //newFuncionario.reference = doc.documentID;
           newFuncionario.add();
           _funcionarioList.add(newFuncionario);
         }
@@ -40,7 +38,6 @@ class _EventosPageState extends State<Eventos>{
           newAcompanhante.nome = acompanhante.nome;
           newAcompanhante.parentesco = acompanhante.parentesco;
           _funcionarioList[index].acompanhante.add(newAcompanhante);
-          //crudObj.addAcompanhante({'documento':_funcionarioList[index].reference.documentId, 'nome':newAcompanhante.nome,'parentesco':newAcompanhante.parentesco});
           newAcompanhante.add(_funcionarioList[index].reference);
         }
       );
@@ -227,13 +224,9 @@ class _EventosPageState extends State<Eventos>{
                                 child: Row(
                                   children: <Widget>[
                                     Expanded(
-                                      child: Text('Nome acompanhante: ' + _funcionarioList[indexPai].acompanhante[index].nome,
-                                      style: TextStyle(fontSize: 16.0)),
-                                    ),            
-                                    Expanded(
-                                      child: Text('Parentesco:' + _funcionarioList[indexPai].acompanhante[index].parentesco,
-                                      style: TextStyle(fontSize: 16.0)),
-                                    ),
+                                      child: Text('Acompanhante: ' + _funcionarioList[indexPai].acompanhante[index].nome + 
+                                      ', ' + _funcionarioList[indexPai].acompanhante[index].parentesco, style: TextStyle(fontSize: 16.0)),
+                                    ),     
                                   ],
                                 ),
                               ),
