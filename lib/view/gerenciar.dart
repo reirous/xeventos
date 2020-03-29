@@ -4,8 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:xeventos/model/acompanhante.dart';
 import 'package:xeventos/model/funcionario.dart';
-import 'package:xeventos/services/crud.dart';
-
 
 class Gerenciar extends StatefulWidget{
 
@@ -20,7 +18,6 @@ class _GerenciarPageState extends State<Gerenciar>{
       selectData();
     }
 
-    crudMethods crudObj = new crudMethods();
     final funcionarioControler = TextEditingController();
     Acompanhante acompanhante = new Acompanhante();
     List _funcionarioList = [];

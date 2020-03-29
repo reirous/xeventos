@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:xeventos/model/acompanhante.dart';
 import 'package:xeventos/model/funcionario.dart';
-import 'package:xeventos/services/crud.dart';
 
 
 class Eventos extends StatefulWidget{
@@ -15,7 +14,6 @@ class Eventos extends StatefulWidget{
 
 class _EventosPageState extends State<Eventos>{
 
-    crudMethods crudObj = new crudMethods();
     final funcionarioControler = TextEditingController();
     Acompanhante acompanhante = new Acompanhante();
     List _funcionarioList = [];
